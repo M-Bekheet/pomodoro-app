@@ -1,0 +1,16 @@
+.Todo {
+    list-style: none;
+}
+.Todo-li {
+    font-size: x-large;
+    color: darkorange;
+    font-weight: 100;
+    font-family: cursive;
+    display: inline;
+}
+
+.image {
+    width: 25px;
+    height: 25px;
+    margin-left: 3em;
+}
