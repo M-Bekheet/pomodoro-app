@@ -2,6 +2,7 @@
   "name": "pomodoro-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "file:///E:/workspace/React-Projects/Pomodoro/pomodoro-app/build/",     
   "dependencies": {
     "@material-ui/core": "^4.3.2",
     "moment": "^2.24.0",

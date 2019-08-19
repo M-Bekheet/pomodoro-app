@@ -1,7 +1,36 @@
 #root{
   margin: auto;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
-.MuiButton-textSecondary{
-  margin: auto;
+.task{
+  margin: 150px auto;
+}
+.task .task_btn{
+  display: block !important;
+  margin: 20px auto !important;
+}
+.task .alert{
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  color: red;
+  transition: 1s opacity ease-out;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  font-size: 14px;
+  margin: 30px auto;
+}
+.task .alert.active{
+  opacity: 1;
+  height: auto;
+}
+.timer{
+  font-size: 40px;
+  margin: 40px;
+}
+.hours, .minutes, .seconds{
+  padding: 10px;
 }

@@ -5,47 +5,48 @@ class Timer extends React.Component {
     super(props);
     this.state = {
       duration: this.props.duration,
-      hours: null,
       minutes: null,
+      hours: null,
       seconds: null
     }
   }
   calcTime = () => { //duration is in minutes
-    const { duration, hours, minutes, seconds } = this.state;
-    if(duration <= 0 || typeof duration !== 'number'  ) {
-      return this.setState({hours: 0, minutes: 0, seconds:0})
+    let {duration, hours, minutes, seconds} = this.state;
+    hours = hours === null ? Math.floor(duration / 60) : hours ;
+    minutes = minutes === null ? duration - hours * 60 : minutes ;
+    seconds = seconds || 0;
+
+    if (hours === 0 && minutes === 0 && seconds === 0) {
+      this.props.timerEnded();
+      return clearInterval(this.timerInterval)
     }
-    const newHours = Math.floor(duration/60);
-    const newMinutes = (duration - newHours*60) % 60;
-    const newSeconds = seconds === null ? 0 : ( seconds === 0 ?  59 : seconds - 1);
-    const newDuration =seconds === 0 ? duration - 1 : duration;
-    console.log(minutes, seconds);
-    this.setState({
-      duration: newDuration, 
-      hours: newHours, 
-      minutes: newMinutes, 
-      seconds: newSeconds
-    })
+
+    hours = hours > 0 && minutes === 0 && seconds === 0 ? hours - 1 : hours;
+    minutes = seconds === 0 && minutes > 0 ? minutes - 1 : minutes;
+    seconds = minutes === 0 && seconds > 0 ? seconds - 1 : seconds === 0 ? 59 : seconds - 1
+
+    this.setState({hours,minutes, seconds})
+
   }
 
-
   componentDidMount(){
+    this.calcTime()
     this.timerInterval = this.state.duration ? setInterval(() => {
       this.calcTime()
-    },1000) : null;
+    }, 1000) : null;
 
   }
   componentWillUnmount(){
     clearInterval(this.timerInterval)
   }
   render(){
- 
+    const {hours, minutes, seconds} = this.state;
     return (
-      <div>
-        {this.state.seconds ? (<div>
-          <span className="hours">{this.state.hours}</span>:
-          <span className="minutues">{this.state.minutes}</span>:
-          <span className="seconds">{this.state.seconds}</span>
+      <div className="timer">
+        {this.state.duration ? (<div>
+          <span className="hours">{hours}</span>:
+          <span className="minutes">{minutes}</span>:
+          <span className="seconds">{seconds}</span>
         </div>) : null}
       </div>
     )
