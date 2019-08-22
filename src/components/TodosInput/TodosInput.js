@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import './Input.css';
+import {connect} from 'react-redux';
+import {addTodo} from '../../redux/Todos/Todos.actions'
+import './TodosInput.css';
 
 class Input extends Component {
     constructor(){
@@ -26,4 +28,10 @@ class Input extends Component {
     }
 }
 
-export default Input;
+const mapDispatchToProps = dispatch => {
+    return {
+       addTodo : newTodo => dispatch(addTodo(newTodo))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Input);

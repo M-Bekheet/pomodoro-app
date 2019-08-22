@@ -2,8 +2,7 @@ import React from 'react'
 import Timer from './Timer';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Input from './Input/Input';
-import uuid from 'uuid/v4';
+import Input from './TodosInput/TodosInput';
 import Todos from '../container/todos/Todos';
 
 class Task extends React.Component{
@@ -13,7 +12,6 @@ class Task extends React.Component{
       duration: 10,
       timerOn: false,
       alert: false,
-      todos: []
     }
   }
   startTimer = () => {
@@ -36,14 +34,6 @@ class Task extends React.Component{
       duration = parseInt(duration) || null;
       this.setState({duration})
     }
-  }
-
-  addTodo = todo => {
-    this.setState({todos: [...this.state.todos, {task: todo, id: uuid(), completed: false}]})
-  }
-
-  deleteTodo = (id) => {
-    this.setState({todos: this.state.todos.filter(todo => todo.id !== id)})
   }
 
   render(){
@@ -70,8 +60,8 @@ class Task extends React.Component{
 
            <div className={this.state.alert ? 'alert active' : 'alert'} >Please, add correct time for the task.</div>
           </form>          
-          <Input addTodo={this.addTodo}/>
-          <Todos todos={this.state.todos} deleteTodo={this.deleteTodo}/>
+          <Input />
+          <Todos/>
         </div>
       )
 }

@@ -1,5 +1,6 @@
 .Todo {
     list-style: none;
+    display: flex;
 }
 .Todo-li {
     font-size: x-large;
@@ -12,5 +13,6 @@
 .image {
     width: 25px;
     height: 25px;
-    margin-left: 3em;
+    margin-left: auto;
+    cursor: pointer;
 }
