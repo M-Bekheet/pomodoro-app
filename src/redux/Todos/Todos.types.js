@@ -1,4 +1,5 @@
 export const todosActionTypes = {
-    addTodos: 'ADD_TODOS',
-    deleteTodos: 'DELETE_TODOS'
+    addTodo: 'ADD_TODO',
+    deleteTodo: 'DELETE_TODO',
+    completeTodo: 'COMPLETE_TODO'
 }

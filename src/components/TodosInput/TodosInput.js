@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {addTodo} from '../../redux/Todos/Todos.actions'
 import './TodosInput.css';
 
-class Input extends Component {
+class TodosInput extends Component {
     constructor(){
         super();
         this.state = {text: ''}
@@ -34,4 +34,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Input);
+export default connect(null, mapDispatchToProps)(TodosInput);

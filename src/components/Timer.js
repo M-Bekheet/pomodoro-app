@@ -7,10 +7,12 @@ class Timer extends React.Component {
       duration: this.props.duration,
       minutes: null,
       hours: null,
-      seconds: null
+      seconds: null,
+      timerOn: this.props.timerOn
     }
   }
   calcTime = () => { //duration is in minutes
+    if(!this.props.timerOn) return 0;
     let {duration, hours, minutes, seconds} = this.state;
     hours = hours === null ? Math.floor(duration / 60) : hours ;
     minutes = minutes === null ? duration - hours * 60 : minutes ;
@@ -25,8 +27,8 @@ class Timer extends React.Component {
     minutes = seconds === 0 && minutes > 0 ? minutes - 1 : minutes;
     seconds = minutes === 0 && seconds > 0 ? seconds - 1 : seconds === 0 ? 59 : seconds - 1
 
-    this.setState({hours,minutes, seconds})
-
+    duration = (hours*60 + minutes + seconds/60).toFixed(2);
+    this.setState({hours,minutes, seconds, duration})
   }
 
   componentDidMount(){
@@ -43,7 +45,7 @@ class Timer extends React.Component {
     const {hours, minutes, seconds} = this.state;
     return (
       <div className="timer">
-        {this.state.duration ? (<div>
+        {this.state.seconds ? (<div>
           <span className="hours">{hours}</span>:
           <span className="minutes">{minutes}</span>:
           <span className="seconds">{seconds}</span>

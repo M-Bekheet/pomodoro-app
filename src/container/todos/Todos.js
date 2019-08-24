@@ -1,20 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Todo from '../Todo/Todo';
-import {deleteTodo} from '../../redux/Todos/Todos.actions';
+import {deleteTodo, completeTodo} from '../../redux/Todos/Todos.actions';
 import './Todos.css';
 
-const Todos = ({todos, deleteTodo}) => {
-        const todosList = todos.map(todo => (
-            <Todo key={todo.id} task={todo.task} id={todo.id} deleteTodo={deleteTodo} />
-        ))
-
-        return(
-            <div className='Todos'>
-                <h1 className='header'>Todo:</h1>
-                {todosList}
-            </div>
-        )
+const Todos = ({todos, deleteTodo, completeTodo}) => {
+    const todosList = todos.map(todo => (
+        <Todo 
+          key={todo.id} 
+          task={todo.task} 
+          id={todo.id}
+          completed={todo.completed}
+          deleteTodo={deleteTodo} 
+          completeTodo={completeTodo} 
+        />
+    ))
+    return(
+        <div className='Todos'>
+            {
+                todosList.length > 0 && (
+                    <div>
+                        <h1 className='header'>Todo:</h1>
+                        {todosList}
+                    </div>
+                )
+            }
+        </div>
+    )
 }
 
 const mapStateToProps = state => {
@@ -25,7 +37,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
    return {
-       deleteTodo : id => dispatch(deleteTodo(id))
+       deleteTodo : id => dispatch(deleteTodo(id)),
+       completeTodo: id => dispatch(completeTodo(id)),
    }
 }
 

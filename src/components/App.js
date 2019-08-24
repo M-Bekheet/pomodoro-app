@@ -1,10 +1,10 @@
 import React from 'react';
-import Task from './Task';
+import Tasks from './Tasks';
 
 const App = () => {
   return (
     <div>
-      <Task/>
+      <Tasks/>
     </div>
   )
 }

@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 #root{
   margin: auto;
   text-align: center;
@@ -5,10 +8,18 @@
   justify-content: center;
 }
 .task{
-  margin: 150px auto;
+  margin: 30px auto;
+}
+#task_input{
+    display: block;
+    padding: 8px;
+    margin: auto;
+    font-size: 1.3em;
+    text-align: center;
+    color: #666;
 }
 .task .task_btn{
-  display: block !important;
+  display: inline-block;
   margin: 20px auto !important;
 }
 .task .alert{
@@ -21,7 +32,6 @@
   font-family: sans-serif;
   letter-spacing: 2px;
   font-size: 14px;
-  margin: 30px auto;
 }
 .task .alert.active{
   opacity: 1;
@@ -29,7 +39,6 @@
 }
 .timer{
   font-size: 40px;
-  margin: 40px;
 }
 .hours, .minutes, .seconds{
   padding: 10px;
