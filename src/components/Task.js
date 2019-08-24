@@ -2,7 +2,8 @@ import React from 'react'
 import Timer from './Timer';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import Input from './TodosInput/TodosInput';
+import Todos from '../container/todos/Todos';
 
 class Task extends React.Component{
   constructor(props){
@@ -10,7 +11,7 @@ class Task extends React.Component{
     this.state = {
       duration: 10,
       timerOn: false,
-      alert: false
+      alert: false,
     }
   }
   startTimer = () => {
@@ -34,8 +35,8 @@ class Task extends React.Component{
       this.setState({duration})
     }
   }
-  render(){
 
+  render(){
       return (
         <div className="task">
           <form noValidate autoComplete="off">
@@ -59,7 +60,8 @@ class Task extends React.Component{
 
            <div className={this.state.alert ? 'alert active' : 'alert'} >Please, add correct time for the task.</div>
           </form>          
-
+          <Input />
+          <Todos/>
         </div>
       )
 }

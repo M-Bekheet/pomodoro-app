@@ -1,0 +1,11 @@
+.Input {
+    padding: 1.5em;
+    width: 100%;
+    font-size: larger;
+    border: transparent;
+    border-bottom: 1px solid lightgray;
+}
+
+.Input:focus {
+    outline-color: bisque;
+}
