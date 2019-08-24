@@ -2,11 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
+import {saveState} from '../src/redux/store/localStorage'
 import * as serviceWorker from './serviceWorker';
 import configureStore from './redux/store/configureStore';
 import { Provider } from 'react-redux';
 
 const store = configureStore();
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 const jsx = (
   <Provider store={store}>

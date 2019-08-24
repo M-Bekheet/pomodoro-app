@@ -1,15 +1,13 @@
-import uuid from 'uuid/v4';
 import {todosActionTypes} from './Todos.types';
+import { loadState } from '../store/localStorage';
+
+const localState = loadState()
 
 const initalState = {
-    todos: [
-            {task: 'wash diches', id: uuid(), completed: false},
-            {task: 'eat pizza', id: uuid(), completed: false}
-        ]
+    todos: [...localState.Todos.todos]
 };
 
 const TodosReducer = (state = initalState, action) => {
-    console.log(state.todos)
     switch (action.type){
         case todosActionTypes.addTodos:
             return {

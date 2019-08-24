@@ -3,7 +3,6 @@ import trash from '../../img/trash.jpg'
 import './Todo.css';
 
 const Todo = ({task, id , deleteTodo}) => {
-    console.log(id)
     const handleDelete = () => {
         deleteTodo(id)
     }

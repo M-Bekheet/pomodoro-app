@@ -5,12 +5,10 @@ import {deleteTodo} from '../../redux/Todos/Todos.actions';
 import './Todos.css';
 
 const Todos = ({todos, deleteTodo}) => {
-        console.log(todos)
         const todosList = todos.map(todo => (
             <Todo key={todo.id} task={todo.task} id={todo.id} deleteTodo={deleteTodo} />
         ))
 
-        console.log(todosList)
         return(
             <div className='Todos'>
                 <h1 className='header'>Todo:</h1>
@@ -20,7 +18,6 @@ const Todos = ({todos, deleteTodo}) => {
 }
 
 const mapStateToProps = state => {
-    console.log(state.Todos.todos)
     return {
         todos: state.Todos.todos
     }
