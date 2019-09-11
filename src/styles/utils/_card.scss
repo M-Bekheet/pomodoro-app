@@ -1,0 +1,44 @@
+.card{
+  background: #fff;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
+  padding: $s-size;
+  margin: $s-size 0.5rem;
+  text-align: center;
+  width: 300px;
+  height: 240px;
+  overflow: hidden;
+  &__title{
+    margin: 0 0 $m-size;
+  }
+  &__items{
+    margin-bottom: $l-size;
+    text-align: left;
+    .card-item{
+      line-height: 1.6;
+      display: flex;
+      justify-content: space-between;
+      word-break: break-all;
+    }
+    .item-content{
+      flex-grow: 1;
+    }
+    .item-content.checked{
+      text-decoration: line-through;
+    }
+  }
+  @media(max-width: $desktop-breakpoint){
+    max-width: 90%;
+    min-width: auto;
+  }
+}
+
+.card.card-modal{
+  min-width: 40vw;
+  @media(max-width: $desktop-breakpoint){
+    width: 80vw;
+  }
+}
+
+.card.add-task-card{
+  padding: $xl-size $m-size;
+}

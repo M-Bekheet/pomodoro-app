@@ -1,25 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import {saveState} from '../src/redux/store/localStorage'
 import * as serviceWorker from './serviceWorker';
-import configureStore from './redux/store/configureStore';
 import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+import { setLocalTasks } from './store/localTasks/localTasks';
+import AppRouter from './routers/AppRouter';
+import "./styles/styles.scss"
 
 const store = configureStore();
 
-store.subscribe(() => {
-  saveState(store.getState());
-});
-
 const jsx = (
   <Provider store={store}>
-    <App/>
+    <AppRouter/>
   </Provider>
 )
 
-ReactDOM.render(jsx, document.getElementById('root'));
+store.subscribe( () => {
+  setLocalTasks( store.getState().tasks );
+});
+
+ReactDOM.render(jsx , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

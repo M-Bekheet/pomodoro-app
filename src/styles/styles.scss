@@ -1,0 +1,15 @@
+// settings
+@import "./variables";
+@import "./base";
+// utils
+@import "./utils/navbar";
+@import "./utils/contentContainer";
+@import "./utils/card";
+@import "./utils/list";
+@import "./utils/input";
+@import "./utils/button";
+// components
+@import "./components/Tasks";
+@import "./components/Task";
+@import "./components/AddTask";
+@import "./components/Timer";

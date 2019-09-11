@@ -1,0 +1,20 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Roboto', sans-serif;
+}
+.clickable{
+  cursor: pointer;
+}
+.center{
+  margin: $s-size auto;
+  text-align: center;
+}
+.show-dots{ //to show dots for long-text of list items
+  display: list-item !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+}

@@ -1,100 +1,129 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Timer from './Timer';
-import Button from '@material-ui/core/Button';
-import TodosInput from './TodosInput/TodosInput';
-import Todos from '../container/todos/Todos';
+import { connect } from 'react-redux';
+import { removeTask, removeItem, checkItem } from '../store/actions/tasks'
+import { makeStyles, Modal, Backdrop, Fade, Button } from '@material-ui/core';
 
-class Task extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      duration: null,
-      timerOn: false,
-      alert: false,
-      taskEnded: true,
-      disableInput: false
-    }
+
+const useStyles = makeStyles(theme => ({
+  lala: {
+    color: 'red'
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    outline: 'none'
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    width: '90%',
+    height: '100%',
+    margin: 'auto'
+  },
+}));
+
+
+
+const Task = ({task, removeTask, removeItem, checkItem}) => {
+  const [open, setOpen] = useState(false);
+  const cardRef = React.createRef()
+  const classes = useStyles();
+  
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleRemoveTask = id => removeTask(id);
+
+  const handleRemoveItem = (taskId, itemId) => { 
+    items.length === 1 && handleClose()
+    removeItem(taskId, itemId); 
   }
-  startTimer = () => {
-    if (typeof this.state.duration === 'number'){
-      this.setState({ timerOn: !this.state.timerOn, alert: false, taskEnded: false, disableInput: true })
-    } else{
-      this.setState({ alert: true });
-    }
-     
-  }
-  timerEnded = ()=> {
-    this.setState({timerOn: false, taskEnded: true, disableInput: false})
-  }
-  onMinituesChange = e => {
+  const handleCheckItem = (taskId, itemId) => {
 
-    if(e) e.preventDefault()
-    //textInput is passed when Enter key is pressed(form submmitted)
-    const inputValue = this.textInput.value === undefined ? e.target.value : this.textInput.value;
+    checkItem(taskId, itemId) }
 
-    
-    if(this.state.timerOn) return null;
-    let duration = inputValue.toString();
-    const correct = duration.match(/^-?\d+$/);
-    if(correct || duration === '') {
-      duration = parseInt(duration) || null;
-      this.setState({duration})
-    }
-  }
-  onKeyPressed = e =>{
-    if(e.key === 'Enter' && this.state.duration) {
-      // this.setState({timerOn: !this.state.timerOn, taskEnded: false, alert: false})
-    }
-  }
-  endTask = e => this.setState({ taskEnded: true, timerOn: false, alert: false, disableInput: false})
+  const {title, items, duration } = task;
 
+  return(
+    <div className="task">
+      <div className="card clickable" onClick={handleOpen}>
+        <h3 className="card__title">{title}</h3>
+        <ul className="card__items list">
+          { 
+            items.map(element => (
+              <li 
+                className={`card-item show-dots ${element.checked ? 'checked' : ''} `}
+                key={element.id}
+              >
+                {element.item}
+              </li>
+            ))
+          }
+        </ul>
+    </div>
 
-  render(){
-      return (
-        <div className="task">
-          <TodosInput />
-          <Todos />
-          <form noValidate autoComplete="off" onSubmit={this.onMinituesChange}>
-            <input
-              id="task_input"
-              placeholder="Task Minutes"
-              value={this.state.duration || ''}
-              onChange={this.onMinituesChange}
-              ref={input => this.textInput=input}
-              disabled={this.state.disableInput}
-              onKeyDown={this.onKeyPressed}
-            />
+      <Modal
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className="task">
+            <div className={`card card-modal ${classes.paper}`} ref={cardRef} >
+              <h3 className="card__title">{title}</h3>
+              <ul className="card__items list">
+                {
+                  items.map(element => (
+                    <li 
+                      className="card-item"
+                      key={element.id}
+                    >
+                      <span 
+                        className={`item-content clickable ${element.checked ? 'checked' : ''} `}
+                        onClick={e => {handleCheckItem(task.id, element.id)}}
+                        >
+                        {element.item}
+                      </span>
+                      <span className="remove-item clickable" onClick={e => handleRemoveItem(task.id, element.id)}>X</span>
+                    </li>
 
-            <Button type="button" color="secondary" onClick={this.startTimer} className='task_btn' >
-              {!this.state.timerOn ? 'Start Task' : 'Pause Task'}
-            </Button>
-                     
-          <Button 
-            type="button" 
-            color="secondary" 
-            onClick={this.endTask} 
-            className='task_btn'
-            style={{ display: this.state.taskEnded ? 'none' : 'inline-block' }}
-            >
-              End Task
-          </Button>
-                     
-            {
-              !this.state.taskEnded && (
-                <Timer 
-                  duration={this.state.duration} 
-                  timerEnded={this.timerEnded} 
-                  timerOn={this.state.timerOn} 
-                />
-              )
-            }
-
-           <div className={this.state.alert ? 'alert active' : 'alert'} >Please, add correct time for the task.</div>
-          </form>          
-        </div>
-      )
+                  ))
+                }
+              </ul>
+              {<div className="card_timer">
+                  <Timer duration={duration} />
+                </div>
+              }
+              <Button type="button" color="secondary" onClick={e => handleRemoveTask(task.id)}>Remove Task</Button>
+            </div>
+          </div>
+        </Fade>
+      </Modal>
+    </div>
+  )
 }
 
+const mapStateToProps = state => {
+  return state
 }
 
-export default Task
+const mapDispatchToProps = dispatch => ({
+  removeTask: id => dispatch( removeTask(id) ),
+  removeItem: (taskId, itemId) => dispatch(removeItem(taskId, itemId) ),
+  checkItem: (taskId, itemId) => dispatch(checkItem(taskId, itemId) )
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Task);

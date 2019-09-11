@@ -1,14 +1,13 @@
 {
-  "name": "pomodoro-app",
+  "name": "pomodoro",
   "version": "0.1.0",
   "private": true,
-  "homepage": "file:///E:/workspace/React-Projects/Pomodoro/pomodoro-app/build/",
   "dependencies": {
-    "@material-ui/core": "^4.3.2",
-    "moment": "^2.24.0",
+    "@material-ui/core": "^4.4.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
     "uuid": "^3.3.3"
@@ -33,5 +32,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0"
   }
 }
