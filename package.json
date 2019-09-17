@@ -2,6 +2,7 @@
   "name": "pomodoro",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pomodoro-tasks-app.netlify.com/",
   "dependencies": {
     "@material-ui/core": "^4.4.1",
     "react": "^16.9.0",
