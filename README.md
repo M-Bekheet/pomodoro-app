@@ -2,11 +2,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Techs and tools used
 
-#### React
-#### Redux
-#### React Router DOM
-#### uuid
-#### Material-UI
+##### React
+##### Redux
+##### React Router DOM
+##### uuid
+##### Material-UI
+
+
+
+
+## Features
+
+##### Adding multiple tasks to track
+##### Each task has multiple items that can be edited, removed, or chacked
+##### Each task is provided with a pomodoro timer.
+##### Timer can be paused, stoped, or switched to a 5-min break after finishing the pomodoro time.
+##### Tasks are stored to the local storage so you don't have to keep the browser open, unless you're tracking items with pomodoro.
+
+
 
 
 ## How to use
