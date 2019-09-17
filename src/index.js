@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import configureStore from './store/configureStore';
+import configureStore from './store/configuration/configureStore';
 import { setLocalTasks } from './store/localTasks/localTasks';
 import AppRouter from './routers/AppRouter';
 import "./styles/styles.scss"

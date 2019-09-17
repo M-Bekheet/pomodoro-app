@@ -23,11 +23,15 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     margin: 'auto'
   },
+  button: {
+    margin: '5px 10px'
+  }
 }));
 
 
 
-const Task = ({task, removeTask, removeItem, checkItem}) => {
+const Task = ({task, removeTask, removeItem, checkItem, history}) => {
+  console.log(history);
   const [open, setOpen] = useState(false);
   const cardRef = React.createRef()
   const classes = useStyles();
@@ -46,6 +50,7 @@ const Task = ({task, removeTask, removeItem, checkItem}) => {
     items.length === 1 && handleClose()
     removeItem(taskId, itemId); 
   }
+  
   const handleCheckItem = (taskId, itemId) => {
 
     checkItem(taskId, itemId) }
@@ -107,7 +112,23 @@ const Task = ({task, removeTask, removeItem, checkItem}) => {
                   <Timer duration={duration} />
                 </div>
               }
-              <Button type="button" color="secondary" onClick={e => handleRemoveTask(task.id)}>Remove Task</Button>
+              <Button
+                type="button"
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={e => history.push(`edit/${task.id}`)}
+              >
+                Edit Task
+              </Button>
+              <Button 
+                type="button" 
+                color="secondary" 
+                variant="contained" 
+                onClick={e => handleRemoveTask(task.id)}
+              >
+                Remove Task
+              </Button>
             </div>
           </div>
         </Fade>

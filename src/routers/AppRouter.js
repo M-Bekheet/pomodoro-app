@@ -1,27 +1,47 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import AddTask from '../components/AddTask';
+import EditTask from '../components/EditTask';
 import Tasks from '../components/Tasks';
-import {Button} from '@material-ui/core';
+import { makeStyles, Button } from '@material-ui/core';
 
-const AppRouter = () => (
-  <Router>
-    <nav className="navbar">
-      <div className="content-container">
-        <ul className="navbar__list list">
-          <li className="navbar-item">
-            <Link to="/"><Button>Home</Button></Link>
-          </li>
-          <li className="navbar-item">
-            <Link to="/add"><Button>Add Task</Button></Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+const useStyles = makeStyles(theme => ({
+  addButton: {
+    borderRadius: '50%',
+    fontSize: 20,
+    height: 50,
+    minWidth: 'auto',
+    width: 50,
+    position: 'fixed',
+    right: 50,
+    bottom: 50
+  }
+}))
 
-    <Route path="/" exact component={Tasks}/>
-    <Route path="/add" exact component={AddTask}/>
-  </Router>
-);
+const AppRouter = () => {
+  const classes = useStyles();
+  return (
+    <Router>
+      <nav className="navbar">
+        <div className="content-container">
+          <ul className="navbar__list list">
+            <li className="navbar-item">
+              <Link className="link" to="/"><Button color="primary">Home</Button></Link>
+            </li>
+            <li className="navbar-item">
+              <Link to="/add">
+                <Button color="primary" variant="contained" aria-label="add" className={classes.addButton}>+</Button>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <Route path="/" exact component={Tasks} />
+      <Route path="/add" exact component={AddTask}/>
+      <Route path="/edit/:id" component={EditTask} />
+    </Router>
+  );
+}
 
 export default AppRouter;
